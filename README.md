@@ -1,5 +1,3 @@
-# altair-slc-random-vibrations-and-Sine-sweep-analysis-eathquake-vibrations-for-modeling
-Altair slc random vibrations and Sine sweep analysis eathquake vibrations for modeling
     %let pgm=altair-slc-random-vibrations-and-Sine-sweep-analysis-eathquake-vibrations-for-modeling;
 
     %stop_submission;
@@ -14,7 +12,6 @@ Altair slc random vibrations and Sine sweep analysis eathquake vibrations for mo
     https://github.com/rogerjdeangelis/altair-slc-random-vibrations-and-Sine-sweep-analysis-eathquake-vibrations-for-modeling/blob/main/random_vibration_time_history.png
     https://github.com/rogerjdeangelis/altair-slc-random-vibrations-and-Sine-sweep-analysis-eathquake-vibrations-for-modeling/blob/main/sine_sweep_frequency.png
 
-
     This analysis is essential for ensuring products survive real-world vibration environments
     from
      your smartphone surviving a drop,
@@ -24,6 +21,17 @@ Altair slc random vibrations and Sine sweep analysis eathquake vibrations for mo
 
     The code generates the vibration profiles that engineers use to test
     and validate products before they reach consumers.
+
+
+    CSVs
+    https://github.com/rogerjdeangelis/altair-slc-random-vibrations-and-Sine-sweep-analysis-eathquake-vibrations-for-modeling/blob/main/example_timeseries.csv
+    https://github.com/rogerjdeangelis/altair-slc-random-vibrations-and-Sine-sweep-analysis-eathquake-vibrations-for-modeling/blob/main/random_psd_profile.csv
+    https://github.com/rogerjdeangelis/altair-slc-random-vibrations-and-Sine-sweep-analysis-eathquake-vibrations-for-modeling/blob/main/random_psd_estimate.csv
+
+    SAS Datasets
+    https://github.com/rogerjdeangelis/altair-slc-random-vibrations-and-Sine-sweep-analysis-eathquake-vibrations-for-modeling/blob/main/example_timeseries.sas7bdat
+    https://github.com/rogerjdeangelis/altair-slc-random-vibrations-and-Sine-sweep-analysis-eathquake-vibrations-for-modeling/blob/main/random_psd_profile.sas7bdat
+    https://github.com/rogerjdeangelis/altair-slc-random-vibrations-and-Sine-sweep-analysis-eathquake-vibrations-for-modeling/blob/main/random_psd_estimate.sas7bdat
 
     This is the profile of the random vibrations
 
@@ -363,6 +371,9 @@ Altair slc random vibrations and Sine sweep analysis eathquake vibrations for mo
     cat("Analysis Complete!\n")
     cat("========================================\n")
     endsubmit;
+    import r=example_timeseries   data=workx.example_timeseries;
+    import r=random_psd_profile   data=workx.random_psd_profile;
+    import r=random_psd_estimate  data=workx.random_psd_estimate;
     run;
 
     /*           _               _
@@ -380,6 +391,21 @@ Altair slc random vibrations and Sine sweep analysis eathquake vibrations for mo
     /* random_vibration_psd.png                                                                                               */
     /* sine_sweep_frequency.png                                                                                               */
     /* random_vibration_psd.png                                                                                               */
+    /*                                                                                                                        */
+    /* R Dataframes                                                                                                           */
+    /* example_timeseries                                                                                                     */
+    /* random_psd_profile                                                                                                     */
+    /* random_psd_estimate                                                                                                    */
+    /*                                                                                                                        */
+    /* Csvs                                                                                                                   */
+    /* d:/csv/example_timeseries.csv                                                                                          */
+    /* d:/csv/random_psd_profile.csv                                                                                          */
+    /* d:/csv/random_psd_estimate.csv                                                                                         */
+    /*                                                                                                                        */
+    /* SLC Datasets                                                                                                           */
+    /* example_timeseries.sas7bdat                                                                                            */
+    /* random_psd_profile.sas7bdat                                                                                            */
+    /* random_psd_estimate.sas7bdat                                                                                           */
     /*                                                                                                                        */
     /* Altair SLC                                                                                                             */
     /*                                                                                                                        */
@@ -433,6 +459,52 @@ Altair slc random vibrations and Sine sweep analysis eathquake vibrations for mo
     /* ========================================                                                                               */
     /* Analysis Complete!                                                                                                     */
     /* ========================================                                                                               */
+    /*                                                                                                                        */
+    /* =======================================================================================================================*/
+    /*                                                                                                                        */
+    /* WORKX.RANDOM_PSD_PROFILE total obs=4
+    /* Obs    FREQ_HZ     PER_HZ
+    /*
+    /*  1        20       0.010
+    /*  2        80       0.030
+    /*  3       200       0.030
+    /*  4       500       0.005
+    /*
+    /* =======================================================================================================================*/
+    /*                                                                                                                        */
+    /* WORKX.RANDOM_PSD_ESTIMATE total obs=1,024                                                                              */
+    /*                     PSD_EST_                                                                                           */
+    /*  Obs    FREQ_HZ    G2_PER_HZ                                                                                           */
+    /*                                                                                                                        */
+    /*    1     0.0000    466410.16                                                                                           */
+    /*    2     0.9766    840852.21                                                                                           */
+    /*    3     1.9531    648237.19                                                                                           */
+    /*    4     2.9297    649039.56                                                                                           */
+    /*    5     3.9063    702528.45                                                                                           */
+    /* ...                                                                                                                    */
+    /* 1020    995.117      53.504                                                                                            */
+    /* 1021    996.094      69.199                                                                                            */
+    /* 1022    997.070      82.002                                                                                            */
+    /* 1023    998.047      95.422                                                                                            */
+    /* 1024    999.023      80.467                                                                                            */
+    /*                                                                                                                        */
+    /*========================================================================================================================*/
+    /* WORKX.EXAMPLE_TIMESERIES total obs=40,000                                                                              */
+    /*                     RANDOM_                                                                                            */
+    /*                   VIBRATION_     SINE_      INST_                                                                      */
+    /*   Obs    TIME_S         G         SWEEP     FREQ_HZ                                                                    */
+    /*                                                                                                                        */
+    /*     1    0.0000      1.40594     0.00000    10.0000                                                                    */
+    /*     2    0.0005      0.64218     0.03141    10.0009                                                                    */
+    /*     3    0.0010      0.20257     0.06280    10.0017                                                                    */
+    /*     4    0.0015     -0.05492     0.09412    10.0026                                                                    */
+    /*     5    0.0020     -0.65048     0.12535    10.0034                                                                    */
+    /* ....                                                                                                                   */
+    /* 39996    19.9975     -0.52780     -0.19947    299.872                                                                  */
+    /* 39997    19.9980     -0.90778     -0.90986    299.898                                                                  */
+    /* 39998    19.9985     -0.69797     -0.87062    299.923                                                                  */
+    /* 39999    19.9990     -0.66393     -0.11393    299.949                                                                  */
+    /* 40000    19.9995     -0.74635      0.73670    299.974                                                                  */
     /**************************************************************************************************************************/
 
     PLOTS
@@ -1235,3 +1307,4 @@ Altair slc random vibrations and Sine sweep analysis eathquake vibrations for mo
      \___|_| |_|\__,_|
 
     */
+
